@@ -132,6 +132,45 @@ group by cus.country
 order by sum(fas.sales_amount) desc;
 
 
+--- 5. Selecting the Top and Bottom N
+--- select Top 3 products has the highest total_revenue
+
+select top 3
+prod.category,
+prod.sub_category,
+prod.product_name, 
+sum(sales_amount) as total_revenue
+from gold.fact_sales fas
+join gold.dim_products prod
+on fas.product_key = prod.product_key
+group by prod.category,prod.sub_category,prod.product_name
+order by sum(sales_amount) desc;
+
+--- select Bottom 3 products 
+select top 3
+prod.category,
+prod.sub_category,
+prod.product_name, 
+sum(sales_amount) as total_revenue
+from gold.fact_sales fas
+join gold.dim_products prod
+on fas.product_key = prod.product_key
+group by prod.category,prod.sub_category,prod.product_name
+order by sum(sales_amount) asc;
+
+
+--- find the 3 customer who placed fewest orders
+select * from 
+	(select cus.first_name, cus.last_name,
+	count(fas.order_number) as orders_placed,
+	row_number() over (order by count(fas.order_number) asc ) as ranking
+	from gold.dim_customer cus
+	join gold.fact_sales fas
+	on cus.customer_key = fas.customer_key
+	group by cus.first_name, cus.last_name)t
+where  ranking <= 5;
+
+
 
 
 
