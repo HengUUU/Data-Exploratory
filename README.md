@@ -4,7 +4,7 @@ HengUUU/HengUUU is a ✨ special ✨ repository because its `README.md` (this fi
 You can click the Preview link to take a look at your changes.
 --->
 
-This project is just to explore the the structure of dataset from sale_transaction dataset from datawarehouse
+This project is just a simple query for exploring the structure of sale_transaction dataset from datawarehouse
 project using Tsql:
 1. Explore Dimension
 2. Explore Date Dim
